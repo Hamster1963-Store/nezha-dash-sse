@@ -1,6 +1,5 @@
 "use client"
 
-import getEnv from "@/lib/env-entry"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import React, { createRef, useEffect, useRef, useState } from "react"
@@ -8,12 +7,10 @@ import React, { createRef, useEffect, useRef, useState } from "react"
 export default function Switch({
   allTag,
   nowTag,
-  tagCountMap,
   onTagChange,
 }: {
   allTag: string[]
   nowTag: string
-  tagCountMap: Record<string, number>
   onTagChange: (tag: string) => void
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -114,9 +111,6 @@ export default function Switch({
             <div className="relative z-20 flex items-center gap-1">
               <div className="whitespace-nowrap flex items-center gap-2">
                 {tag === "defaultTag" ? t("defaultTag") : tag}{" "}
-                {getEnv("NEXT_PUBLIC_ShowTagCount") === "true" && tag !== "defaultTag" && (
-                  <div className="w-fit px-1.5 rounded-full bg-muted">{tagCountMap[tag]}</div>
-                )}
               </div>
             </div>
           </div>

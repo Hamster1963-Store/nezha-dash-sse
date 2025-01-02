@@ -5,7 +5,6 @@ import ServerDetailChartClient from "@/app/(main)/ClientComponents/detail/Server
 import ServerDetailClient from "@/app/(main)/ClientComponents/detail/ServerDetailClient"
 import TabSwitch from "@/components/TabSwitch"
 import { Separator } from "@/components/ui/separator"
-import getEnv from "@/lib/env-entry"
 import { use, useState } from "react"
 
 import ServerIPInfo from "../../ClientComponents/detail/ServerIPInfo"
@@ -28,7 +27,7 @@ export default function Page(props: { params: Promise<{ id: string }> }) {
         <ServerDetailChartClient server_id={Number(params.id)} show={currentTab === tabs[0]} />
       </div>
       <div style={{ display: currentTab === tabs[1] ? "block" : "none" }}>
-        {getEnv("NEXT_PUBLIC_ShowIpInfo") && <ServerIPInfo server_id={Number(params.id)} />}
+        <ServerIPInfo server_id={Number(params.id)} />
         <NetworkChartClient server_id={Number(params.id)} show={currentTab === tabs[1]} />
       </div>
     </div>

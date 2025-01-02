@@ -1,6 +1,4 @@
-import getEnv from "@/lib/env-entry"
 import { GetServerMonitor } from "@/lib/serverFetch"
-import { redirect } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"

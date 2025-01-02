@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/chart"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import getEnv from "@/lib/env-entry"
 import { formatTime, nezhaFetcher } from "@/lib/utils"
 import { formatRelativeTime } from "@/lib/utils"
 import { useTranslations } from "next-intl"
@@ -33,7 +32,7 @@ export function NetworkChartClient({ server_id, show }: { server_id: number; sho
     `/api/monitor?server_id=${server_id}`,
     nezhaFetcher,
     {
-      refreshInterval: Number(getEnv("NEXT_PUBLIC_NezhaFetchInterval")) || 15000,
+      refreshInterval: 15000,
       isVisible: () => show,
     },
   )

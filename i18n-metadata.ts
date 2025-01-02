@@ -1,5 +1,4 @@
 // @auto-i18n-check. Please do not delete the line.
-import getEnv from "./lib/env-entry"
 
 export const localeItems = [
   { code: "en", name: "English" },
@@ -9,4 +8,4 @@ export const localeItems = [
 ]
 
 export const locales = localeItems.map((item) => item.code)
-export const defaultLocale = getEnv("DefaultLocale") || "en"
+export const defaultLocale = "zh"

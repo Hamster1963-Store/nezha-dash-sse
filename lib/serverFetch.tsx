@@ -1,10 +1,9 @@
 "use server"
 
 import { NezhaAPI } from "@/app/types/nezha-api"
-import getEnv from "@/lib/env-entry"
 
 export async function GetServerMonitor({ server_id }: { server_id: number }) {
-  let nezhaBaseUrl = getEnv("NezhaBaseUrl")
+  let nezhaBaseUrl = process.env["NezhaBaseUrl"]
   if (!nezhaBaseUrl) {
     console.error("NezhaBaseUrl is not set")
     throw new Error("NezhaBaseUrl is not set")
@@ -16,7 +15,7 @@ export async function GetServerMonitor({ server_id }: { server_id: number }) {
   try {
     const response = await fetch(`${nezhaBaseUrl}/api/v1/monitor/${server_id}`, {
       headers: {
-        Authorization: getEnv("NezhaAuth") as string,
+        Authorization: process.env["NezhaAuth"] as string,
       },
       next: {
         revalidate: 0,
@@ -44,7 +43,7 @@ export async function GetServerMonitor({ server_id }: { server_id: number }) {
 }
 
 export async function GetServerIP({ server_id }: { server_id: number }): Promise<string> {
-  let nezhaBaseUrl = getEnv("NezhaBaseUrl")
+  let nezhaBaseUrl = process.env["NezhaBaseUrl"]
   if (!nezhaBaseUrl) {
     console.error("NezhaBaseUrl is not set")
     throw new Error("NezhaBaseUrl is not set")
@@ -56,7 +55,7 @@ export async function GetServerIP({ server_id }: { server_id: number }): Promise
   try {
     const response = await fetch(`${nezhaBaseUrl}/api/v1/server/details`, {
       headers: {
-        Authorization: getEnv("NezhaAuth") as string,
+        Authorization: process.env["NezhaAuth"] as string,
       },
       next: {
         revalidate: 0,

@@ -1,6 +1,5 @@
 // @auto-i18n-check. Please do not delete the line.
 import { ThemeColorManager } from "@/components/ThemeColorManager"
-import getEnv from "@/lib/env-entry"
 import { FilterProvider } from "@/lib/network-filter-context"
 import { StatusProvider } from "@/lib/status-context"
 import { cn } from "@/lib/utils"
@@ -9,7 +8,6 @@ import type { Metadata } from "next"
 import { Viewport } from "next"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale, getMessages } from "next-intl/server"
-import { PublicEnvScript } from "next-runtime-env"
 import { ThemeProvider } from "next-themes"
 import { Inter as FontSans } from "next/font/google"
 import React from "react"
@@ -19,9 +17,8 @@ const fontSans = FontSans({
   variable: "--font-sans",
 })
 
-const customTitle = getEnv("NEXT_PUBLIC_CustomTitle")
-const customDescription = getEnv("NEXT_PUBLIC_CustomDescription")
-const disableIndex = getEnv("NEXT_PUBLIC_DisableIndex")
+const customTitle = "咖啡探针"
+const customDescription = "☕️"
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
@@ -31,10 +28,6 @@ export const metadata: Metadata = {
     capable: true,
     title: customTitle || "NezhaDash",
     statusBarStyle: "default",
-  },
-  robots: {
-    index: disableIndex ? false : true,
-    follow: disableIndex ? false : true,
   },
 }
 
@@ -52,7 +45,6 @@ export default async function LocaleLayout({ children }: { children: React.React
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <PublicEnvScript />
         <link
           rel="stylesheet"
           href="https://fastly.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"

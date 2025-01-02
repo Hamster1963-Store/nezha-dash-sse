@@ -5,7 +5,6 @@ import ServerCard from "@/components/ServerCard"
 import ServerCardInline from "@/components/ServerCardInline"
 import Switch from "@/components/Switch"
 import { Loader } from "@/components/loading/Loader"
-import getEnv from "@/lib/env-entry"
 import { useFilter } from "@/lib/network-filter-context"
 import { useStatus } from "@/lib/status-context"
 import { cn } from "@/lib/utils"
@@ -116,13 +115,6 @@ export default function ServerListClient() {
     })
   }
 
-  const tagCountMap: Record<string, number> = {}
-  filteredServersByStatus.forEach((server) => {
-    if (server.tag) {
-      tagCountMap[server.tag] = (tagCountMap[server.tag] || 0) + 1
-    }
-  })
-
   return (
     <>
       <section className="flex items-center gap-2 w-full overflow-hidden">
@@ -153,14 +145,7 @@ export default function ServerListClient() {
         >
           <ViewColumnsIcon className="size-[13px]" />
         </button>
-        {getEnv("NEXT_PUBLIC_ShowTag") === "true" && (
-          <Switch
-            allTag={uniqueTags}
-            nowTag={tag}
-            tagCountMap={tagCountMap}
-            onTagChange={handleTagChange}
-          />
-        )}
+        <Switch allTag={uniqueTags} nowTag={tag} onTagChange={handleTagChange} />
       </section>
       {showMap && <ServerGlobal />}
       {inline === "1" && (

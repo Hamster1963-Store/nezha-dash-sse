@@ -2,7 +2,6 @@ import { NezhaAPISafe } from "@/app/types/nezha-api"
 import ServerFlag from "@/components/ServerFlag"
 import ServerUsageBar from "@/components/ServerUsageBar"
 import { Card } from "@/components/ui/card"
-import getEnv from "@/lib/env-entry"
 import { GetFontLogoClass, GetOsName, MageMicrosoftWindows } from "@/lib/logo-class"
 import { cn, formatBytes, formatNezhaInfo } from "@/lib/utils"
 import { useTranslations } from "next-intl"
@@ -15,7 +14,7 @@ export default function ServerCardInline({ serverInfo }: { serverInfo: NezhaAPIS
   const { id, name, country_code, online, cpu, up, down, mem, stg, host } =
     formatNezhaInfo(serverInfo)
 
-  const showFlag = getEnv("NEXT_PUBLIC_ShowFlag") === "true"
+  const showFlag = true
 
   const saveSession = () => {
     sessionStorage.setItem("fromMainPage", "true")

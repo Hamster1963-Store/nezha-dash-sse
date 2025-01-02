@@ -4,7 +4,6 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { ModeToggle } from "@/components/ThemeSwitcher"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
-import getEnv from "@/lib/env-entry"
 import { DateTime } from "luxon"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -12,9 +11,8 @@ import React, { useEffect, useRef, useState } from "react"
 
 function Header() {
   const t = useTranslations("Header")
-  const customLogo = getEnv("NEXT_PUBLIC_CustomLogo")
-  const customTitle = getEnv("NEXT_PUBLIC_CustomTitle")
-  const customDescription = getEnv("NEXT_PUBLIC_CustomDescription")
+  const customTitle = "咖啡探针"
+  const customDescription = "☕️"
 
   const router = useRouter()
 
@@ -33,14 +31,14 @@ function Header() {
               width={40}
               height={40}
               alt="apple-touch-icon"
-              src={customLogo ? customLogo : "/apple-touch-icon.png"}
+              src={"/apple-touch-icon.png"}
               className="relative m-0! border-2 border-transparent h-6 w-6 object-cover object-top p-0! dark:hidden"
             />
             <img
               width={40}
               height={40}
               alt="apple-touch-icon"
-              src={customLogo ? customLogo : "/apple-touch-icon-dark.png"}
+              src={"/apple-touch-icon-dark.png"}
               className="relative m-0! border-2 border-transparent h-6 w-6 object-cover object-top p-0! hidden dark:block"
             />
           </div>
@@ -72,11 +70,10 @@ type links = {
 }
 
 function Links() {
-  const linksEnv = getEnv("NEXT_PUBLIC_Links")
-
-  const links: links[] | null = linksEnv ? JSON.parse(linksEnv) : null
-
-  if (!links) return null
+  const links: links[] = [
+    { link: "https://github.com/hamster1963/nezha-dash", name: "GitHub" },
+    { link: "https://buycoffee.top/coffee", name: "Buycoffee☕️" },
+  ]
 
   return (
     <div className="flex items-center gap-2">
