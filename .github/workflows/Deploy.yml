@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY_IMAGE: hamster1963/nezha-dash
-  ALIYUN_REGISTRY_IMAGE: registry.cn-guangzhou.aliyuncs.com/hamster-home/nezha-dash
+  ALIYUN_REGISTRY_IMAGE: registry.cn-guangzhou.aliyuncs.com/hamster-home/nezhadash-sse
 
 jobs:
   build-and-push:
