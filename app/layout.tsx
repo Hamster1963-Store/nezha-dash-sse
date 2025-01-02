@@ -11,6 +11,7 @@ import { getLocale, getMessages } from "next-intl/server"
 import { ThemeProvider } from "next-themes"
 import { Inter as FontSans } from "next/font/google"
 import React from "react"
+import { WebSocketProvider } from "./lib/websocketProvider"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -62,12 +63,14 @@ export default async function LocaleLayout({ children }: { children: React.React
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <FilterProvider>
-              <StatusProvider>
-                <ThemeColorManager />
-                {children}
-              </StatusProvider>
-            </FilterProvider>
+            <WebSocketProvider>
+              <FilterProvider>
+                <StatusProvider>
+                  <ThemeColorManager />
+                  {children}
+                </StatusProvider>
+              </FilterProvider>
+            </WebSocketProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

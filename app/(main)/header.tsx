@@ -2,19 +2,25 @@
 
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { ModeToggle } from "@/components/ThemeSwitcher"
+import { Loader } from "@/components/loading/Loader"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
+import { cn } from "@/lib/utils"
 import { DateTime } from "luxon"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useRef, useState } from "react"
+import { useWebSocketContext } from "../lib/websocketProvider"
 
 function Header() {
   const t = useTranslations("Header")
   const customTitle = "咖啡探针"
-  const customDescription = "☕️"
+  const customDescription = "Coffee ☕️"
 
   const router = useRouter()
+
+  const { connected, onlineCount } = useWebSocketContext()
 
   return (
     <div className="mx-auto w-full max-w-5xl">
@@ -54,6 +60,21 @@ function Header() {
           </div>
           <LanguageSwitcher />
           <ModeToggle />
+          <Button
+            variant="outline"
+            size="sm"
+            className={cn(
+              "hover:bg-white dark:hover:bg-black cursor-default rounded-full flex gap-2 items-center px-[9px] bg-white dark:bg-black",
+            )}
+          >
+            {connected ? onlineCount : <Loader visible={true} />}
+            <p className="text-muted-foreground">{connected ? "在线" : "离线"}</p>
+            <span
+              className={cn("h-2 w-2 rounded-full bg-green-500", {
+                "bg-red-500": !connected,
+              })}
+            ></span>
+          </Button>
         </section>
       </section>
       <div className="w-full flex justify-end sm:hidden mt-1">
