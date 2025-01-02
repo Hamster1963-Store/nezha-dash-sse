@@ -9,7 +9,6 @@ import { useFilter } from "@/lib/network-filter-context"
 import { useStatus } from "@/lib/status-context"
 import { cn } from "@/lib/utils"
 import { MapIcon, ViewColumnsIcon } from "@heroicons/react/20/solid"
-import { useTranslations } from "next-intl"
 import dynamic from "next/dynamic"
 import { useEffect, useRef, useState } from "react"
 
@@ -23,7 +22,6 @@ const ServerGlobal = dynamic(() => import("./Global"), {
 export default function ServerListClient() {
   const { status } = useStatus()
   const { filter } = useFilter()
-  const t = useTranslations("ServerListClient")
   const containerRef = useRef<HTMLDivElement>(null)
   const defaultTag = "defaultTag"
 
@@ -76,7 +74,7 @@ export default function ServerListClient() {
       <div className="flex flex-col items-center min-h-96 justify-center ">
         <div className="font-semibold flex items-center gap-2 text-sm">
           <Loader visible={true} />
-          {t("connecting")}...
+          {"连接中"}...
         </div>
       </div>
     )

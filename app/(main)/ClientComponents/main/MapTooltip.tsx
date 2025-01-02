@@ -1,13 +1,11 @@
 "use client"
 
-import { useTranslations } from "next-intl"
 import { memo } from "react"
 
 import { useTooltip } from "../detail/TooltipContext"
 
 const MapTooltip = memo(function MapTooltip() {
   const { tooltipData } = useTooltip()
-  const t = useTranslations("Global")
 
   if (!tooltipData) return null
 
@@ -33,7 +31,7 @@ const MapTooltip = memo(function MapTooltip() {
           {tooltipData.country === "China" ? "Mainland China" : tooltipData.country}
         </p>
         <p className="text-neutral-600 dark:text-neutral-400 mb-1">
-          {tooltipData.count} {t("Servers")}
+          {tooltipData.count} {"台服务器"}
         </p>
       </div>
       <div

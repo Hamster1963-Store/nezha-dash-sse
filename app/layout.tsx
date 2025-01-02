@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils"
 import "@/styles/globals.css"
 import type { Metadata } from "next"
 import { Viewport } from "next"
-import { NextIntlClientProvider } from "next-intl"
-import { getLocale, getMessages } from "next-intl/server"
 import { ThemeProvider } from "next-themes"
 import { Inter as FontSans } from "next/font/google"
 import React from "react"
@@ -40,11 +38,8 @@ export const viewport: Viewport = {
 }
 
 export default async function LocaleLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale()
-  const messages = await getMessages()
-
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -62,16 +57,14 @@ export default async function LocaleLayout({ children }: { children: React.React
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={messages}>
-            <WebSocketProvider>
-              <FilterProvider>
-                <StatusProvider>
-                  <ThemeColorManager />
-                  {children}
-                </StatusProvider>
-              </FilterProvider>
-            </WebSocketProvider>
-          </NextIntlClientProvider>
+          <WebSocketProvider>
+            <FilterProvider>
+              <StatusProvider>
+                <ThemeColorManager />
+                {children}
+              </StatusProvider>
+            </FilterProvider>
+          </WebSocketProvider>
         </ThemeProvider>
       </body>
     </html>

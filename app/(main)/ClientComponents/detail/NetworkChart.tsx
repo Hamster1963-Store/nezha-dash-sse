@@ -15,7 +15,6 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { formatTime, nezhaFetcher } from "@/lib/utils"
 import { formatRelativeTime } from "@/lib/utils"
-import { useTranslations } from "next-intl"
 import * as React from "react"
 import { useCallback, useMemo } from "react"
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
@@ -27,7 +26,6 @@ interface ResultItem {
 }
 
 export function NetworkChartClient({ server_id, show }: { server_id: number; show: boolean }) {
-  const t = useTranslations("NetworkChartClient")
   const { data, error } = useSWR<NezhaAPIMonitor[]>(
     `/api/monitor?server_id=${server_id}`,
     nezhaFetcher,
@@ -42,7 +40,6 @@ export function NetworkChartClient({ server_id, show }: { server_id: number; sho
       <>
         <div className="flex flex-col items-center justify-center">
           <p className="text-sm font-medium opacity-40">{error.message}</p>
-          <p className="text-sm font-medium opacity-40">{t("chart_fetch_error_message")}</p>
         </div>
         <NetworkChartLoading />
       </>
@@ -57,7 +54,7 @@ export function NetworkChartClient({ server_id, show }: { server_id: number; sho
 
   const initChartConfig = {
     avg_delay: {
-      label: t("avg_delay"),
+      label: "延迟",
     },
   } satisfies ChartConfig
 
@@ -87,8 +84,6 @@ export const NetworkChart = React.memo(function NetworkChart({
   serverName: string
   formattedData: ResultItem[]
 }) {
-  const t = useTranslations("NetworkChart")
-
   const defaultChart = "All"
 
   const [activeChart, setActiveChart] = React.useState(defaultChart)
@@ -258,7 +253,7 @@ export const NetworkChart = React.memo(function NetworkChart({
             {serverName}
           </CardTitle>
           <CardDescription className="text-xs">
-            {chartDataKey.length} {t("ServerMonitorCount")}
+            {chartDataKey.length} {"个监控服务"}
           </CardDescription>
           <div className="flex items-center mt-0.5 space-x-2">
             <Switch id="Peak" checked={isPeakEnabled} onCheckedChange={setIsPeakEnabled} />

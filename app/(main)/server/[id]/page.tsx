@@ -11,7 +11,7 @@ import ServerIPInfo from "../../ClientComponents/detail/ServerIPInfo"
 
 export default function Page(props: { params: Promise<{ id: string }> }) {
   const params = use(props.params)
-  const tabs = ["Detail", "Network"]
+  const tabs = ["详情", "网络"]
   const [currentTab, setCurrentTab] = useState(tabs[0])
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-2">

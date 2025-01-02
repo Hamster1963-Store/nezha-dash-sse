@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { useTranslations } from "next-intl"
 import React, { useEffect, useRef, useState } from "react"
 
 export default function TabSwitch({
@@ -13,7 +12,6 @@ export default function TabSwitch({
   currentTab: string
   setCurrentTab: (tab: string) => void
 }) {
-  const t = useTranslations("TabSwitch")
   const [indicator, setIndicator] = useState<{ x: number; w: number }>({ x: 0, w: 0 })
   const tabRefs = useRef<(HTMLDivElement | null)[]>([])
 
@@ -61,7 +59,7 @@ export default function TabSwitch({
             )}
           >
             <div className="relative z-20 flex items-center gap-1">
-              <p className="whitespace-nowrap">{t(tab)}</p>
+              <p className="whitespace-nowrap">{tab}</p>
             </div>
           </div>
         ))}

@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { useTranslations } from "next-intl"
 import React, { createRef, useEffect, useRef, useState } from "react"
 
 export default function Switch({
@@ -15,7 +14,6 @@ export default function Switch({
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const tagRefs = useRef(allTag.map(() => createRef<HTMLDivElement>()))
-  const t = useTranslations("ServerListClient")
   const [indicator, setIndicator] = useState<{ x: number; w: number }>({ x: 0, w: 0 })
 
   useEffect(() => {
@@ -110,7 +108,7 @@ export default function Switch({
           >
             <div className="relative z-20 flex items-center gap-1">
               <div className="whitespace-nowrap flex items-center gap-2">
-                {tag === "defaultTag" ? t("defaultTag") : tag}{" "}
+                {tag === "defaultTag" ? "defaultTag" : tag}{" "}
               </div>
             </div>
           </div>

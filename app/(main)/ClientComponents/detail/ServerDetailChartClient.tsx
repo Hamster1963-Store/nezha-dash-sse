@@ -7,7 +7,6 @@ import AnimatedCircularProgressBar from "@/components/ui/animated-circular-progr
 import { Card, CardContent } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { formatBytes, formatNezhaInfo, formatRelativeTime } from "@/lib/utils"
-import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 import { Area, AreaChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 
@@ -191,7 +190,6 @@ function ProcessChart({
   data: NezhaAPISafe
   history: ServerDataWithTimestamp[]
 }) {
-  const t = useTranslations("ServerDetailChartClient")
   const [processChartData, setProcessChartData] = useState([] as processChartData[])
   const hasInitialized = useRef(false)
   const [historyLoaded, setHistoryLoaded] = useState(false)
@@ -251,7 +249,7 @@ function ProcessChart({
       <CardContent className="px-6 py-3">
         <section className="flex flex-col gap-1">
           <div className="flex items-center justify-between">
-            <p className="text-md font-medium">{t("Process")}</p>
+            <p className="text-md font-medium">{"Process"}</p>
             <section className="flex items-center gap-2">
               <p className="text-xs text-end w-10 font-medium">{process}</p>
             </section>
@@ -294,7 +292,6 @@ function ProcessChart({
 }
 
 function MemChart({ data, history }: { data: NezhaAPISafe; history: ServerDataWithTimestamp[] }) {
-  const t = useTranslations("ServerDetailChartClient")
   const [memChartData, setMemChartData] = useState([] as memChartData[])
   const hasInitialized = useRef(false)
   const [historyLoaded, setHistoryLoaded] = useState(false)
@@ -360,7 +357,7 @@ function MemChart({ data, history }: { data: NezhaAPISafe; history: ServerDataWi
           <div className="flex items-center justify-between">
             <section className="flex items-center gap-4">
               <div className="flex flex-col">
-                <p className=" text-xs text-muted-foreground">{t("Mem")}</p>
+                <p className=" text-xs text-muted-foreground">{"Mem"}</p>
                 <div className="flex items-center gap-2">
                   <AnimatedCircularProgressBar
                     className="size-3 text-[0px]"
@@ -373,7 +370,7 @@ function MemChart({ data, history }: { data: NezhaAPISafe; history: ServerDataWi
                 </div>
               </div>
               <div className="flex flex-col">
-                <p className=" text-xs text-muted-foreground">{t("Swap")}</p>
+                <p className=" text-xs text-muted-foreground">{"Swap"}</p>
                 <div className="flex items-center gap-2">
                   <AnimatedCircularProgressBar
                     className="size-3 text-[0px]"
@@ -448,7 +445,6 @@ function MemChart({ data, history }: { data: NezhaAPISafe; history: ServerDataWi
 }
 
 function DiskChart({ data, history }: { data: NezhaAPISafe; history: ServerDataWithTimestamp[] }) {
-  const t = useTranslations("ServerDetailChartClient")
   const [diskChartData, setDiskChartData] = useState([] as diskChartData[])
   const hasInitialized = useRef(false)
   const [historyLoaded, setHistoryLoaded] = useState(false)
@@ -508,7 +504,7 @@ function DiskChart({ data, history }: { data: NezhaAPISafe; history: ServerDataW
       <CardContent className="px-6 py-3">
         <section className="flex flex-col gap-1">
           <div className="flex items-center justify-between">
-            <p className="text-md font-medium">{t("Disk")}</p>
+            <p className="text-md font-medium">{"Disk"}</p>
             <section className="flex flex-col items-end gap-0.5">
               <section className="flex items-center gap-2">
                 <p className="text-xs text-end w-10 font-medium">{disk.toFixed(0)}%</p>
@@ -576,7 +572,6 @@ function NetworkChart({
   data: NezhaAPISafe
   history: ServerDataWithTimestamp[]
 }) {
-  const t = useTranslations("ServerDetailChartClient")
   const [networkChartData, setNetworkChartData] = useState([] as networkChartData[])
   const hasInitialized = useRef(false)
   const [historyLoaded, setHistoryLoaded] = useState(false)
@@ -648,14 +643,14 @@ function NetworkChart({
           <div className="flex items-center">
             <section className="flex items-center gap-4">
               <div className="flex flex-col w-20">
-                <p className="text-xs text-muted-foreground">{t("Upload")}</p>
+                <p className="text-xs text-muted-foreground">{"Upload"}</p>
                 <div className="flex items-center gap-1">
                   <span className="relative inline-flex  size-1.5 rounded-full bg-[hsl(var(--chart-1))]"></span>
                   <p className="text-xs font-medium">{up.toFixed(2)} M/s</p>
                 </div>
               </div>
               <div className="flex flex-col w-20">
-                <p className=" text-xs text-muted-foreground">{t("Download")}</p>
+                <p className=" text-xs text-muted-foreground">{"Download"}</p>
                 <div className="flex items-center gap-1">
                   <span className="relative inline-flex  size-1.5 rounded-full bg-[hsl(var(--chart-4))]"></span>
                   <p className="text-xs font-medium">{down.toFixed(2)} M/s</p>

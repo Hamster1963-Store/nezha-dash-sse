@@ -8,14 +8,12 @@ import { useStatus } from "@/lib/status-context"
 import { cn, formatBytes } from "@/lib/utils"
 import blogMan from "@/public/blog-man.webp"
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from "@heroicons/react/20/solid"
-import { useTranslations } from "next-intl"
 import Image from "next/image"
 
 export default function ServerOverviewClient() {
   const { data } = useServerData()
   const { status, setStatus } = useStatus()
   const { filter, setFilter } = useFilter()
-  const t = useTranslations("ServerOverviewClient")
 
   return (
     <>
@@ -29,7 +27,7 @@ export default function ServerOverviewClient() {
         >
           <CardContent className="flex h-full items-center px-6 py-3">
             <section className="flex flex-col gap-1">
-              <p className="text-sm font-medium md:text-base">{t("p_816-881_Totalservers")}</p>
+              <p className="text-sm font-medium md:text-base">{"服务器总数"}</p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
@@ -59,7 +57,7 @@ export default function ServerOverviewClient() {
         >
           <CardContent className="flex h-full items-center px-6 py-3">
             <section className="flex flex-col gap-1">
-              <p className="text-sm font-medium md:text-base">{t("p_1610-1676_Onlineservers")}</p>
+              <p className="text-sm font-medium md:text-base">{"在线服务器"}</p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
@@ -90,7 +88,7 @@ export default function ServerOverviewClient() {
         >
           <CardContent className="flex h-full items-center px-6 py-3">
             <section className="flex flex-col gap-1">
-              <p className="text-sm font-medium md:text-base">{t("p_2532-2599_Offlineservers")}</p>
+              <p className="text-sm font-medium md:text-base">{"离线服务器"}</p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
@@ -122,7 +120,7 @@ export default function ServerOverviewClient() {
           <CardContent className="flex h-full items-center relative px-6 py-3">
             <section className="flex flex-col gap-1 w-full">
               <div className="flex items-center w-full justify-between">
-                <p className="text-sm font-medium md:text-base">{t("network")}</p>
+                <p className="text-sm font-medium md:text-base">{"网络"}</p>
               </div>
               {data?.result ? (
                 <>

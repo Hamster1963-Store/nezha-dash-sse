@@ -4,13 +4,11 @@ import ServerUsageBar from "@/components/ServerUsageBar"
 import { Card } from "@/components/ui/card"
 import { GetFontLogoClass, GetOsName, MageMicrosoftWindows } from "@/lib/logo-class"
 import { cn, formatBytes, formatNezhaInfo } from "@/lib/utils"
-import { useTranslations } from "next-intl"
 import Link from "next/link"
 
 import { Separator } from "./ui/separator"
 
 export default function ServerCardInline({ serverInfo }: { serverInfo: NezhaAPISafe }) {
-  const t = useTranslations("ServerCard")
   const { id, name, country_code, online, cpu, up, down, mem, stg, host } =
     formatNezhaInfo(serverInfo)
 
@@ -63,53 +61,53 @@ export default function ServerCardInline({ serverInfo }: { serverInfo: NezhaAPIS
                 )}
               </div>
               <div className={"flex w-14 flex-col"}>
-                <p className="text-xs text-muted-foreground">{t("System")}</p>
+                <p className="text-xs text-muted-foreground">{"系统"}</p>
                 <div className="flex items-center text-[10.5px] font-semibold">
                   {host.Platform.includes("Windows") ? "Windows" : GetOsName(host.Platform)}
                 </div>
               </div>
             </div>
             <div className={"flex w-20 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("Uptime")}</p>
+              <p className="text-xs text-muted-foreground">{"在线"}</p>
               <div className="flex items-center text-xs font-semibold">
                 {(serverInfo?.status.Uptime / 86400).toFixed(0)} {"Days"}
               </div>
             </div>
             <div className={"flex w-14 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("CPU")}</p>
+              <p className="text-xs text-muted-foreground">{"CPU"}</p>
               <div className="flex items-center text-xs font-semibold">{cpu.toFixed(2)}%</div>
               <ServerUsageBar value={cpu} />
             </div>
             <div className={"flex w-14 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("Mem")}</p>
+              <p className="text-xs text-muted-foreground">{"内存"}</p>
               <div className="flex items-center text-xs font-semibold">{mem.toFixed(2)}%</div>
               <ServerUsageBar value={mem} />
             </div>
             <div className={"flex w-14 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("STG")}</p>
+              <p className="text-xs text-muted-foreground">{"存储"}</p>
               <div className="flex items-center text-xs font-semibold">{stg.toFixed(2)}%</div>
               <ServerUsageBar value={stg} />
             </div>
             <div className={"flex w-16 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("Upload")}</p>
+              <p className="text-xs text-muted-foreground">{"上传"}</p>
               <div className="flex items-center text-xs font-semibold">
                 {up >= 1024 ? `${(up / 1024).toFixed(2)}G/s` : `${up.toFixed(2)}M/s`}
               </div>
             </div>
             <div className={"flex w-16 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("Download")}</p>
+              <p className="text-xs text-muted-foreground">{"下载"}</p>
               <div className="flex items-center text-xs font-semibold">
                 {down >= 1024 ? `${(down / 1024).toFixed(2)}G/s` : `${down.toFixed(2)}M/s`}
               </div>
             </div>
             <div className={"flex w-20 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("TotalUpload")}</p>
+              <p className="text-xs text-muted-foreground">{"总上传"}</p>
               <div className="flex items-center text-xs font-semibold">
                 {formatBytes(serverInfo.status.NetOutTransfer)}
               </div>
             </div>
             <div className={"flex w-20 flex-col"}>
-              <p className="text-xs text-muted-foreground">{t("TotalDownload")}</p>
+              <p className="text-xs text-muted-foreground">{"总下载"}</p>
               <div className="flex items-center text-xs font-semibold">
                 {formatBytes(serverInfo.status.NetInTransfer)}
               </div>

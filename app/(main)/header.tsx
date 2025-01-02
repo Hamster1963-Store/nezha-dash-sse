@@ -1,6 +1,5 @@
 "use client"
 
-import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { ModeToggle } from "@/components/ThemeSwitcher"
 import { Loader } from "@/components/loading/Loader"
 import { Button } from "@/components/ui/button"
@@ -8,13 +7,11 @@ import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 import { DateTime } from "luxon"
-import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useRef, useState } from "react"
 import { useWebSocketContext } from "../lib/websocketProvider"
 
 function Header() {
-  const t = useTranslations("Header")
   const customTitle = "咖啡探针"
   const customDescription = "Coffee ☕️"
 
@@ -50,15 +47,12 @@ function Header() {
           </div>
           {customTitle ? customTitle : "NezhaDash"}
           <Separator orientation="vertical" className="mx-2 hidden h-4 w-[1px] md:block" />
-          <p className="hidden text-sm font-medium opacity-40 md:block">
-            {customDescription ? customDescription : t("p_1079-1199_Simpleandbeautifuldashbo")}
-          </p>
+          <p className="hidden text-sm font-medium opacity-40 md:block">{customDescription}</p>
         </section>
         <section className="flex items-center gap-2">
           <div className="hidden sm:block">
             <Links />
           </div>
-          <LanguageSwitcher />
           <ModeToggle />
           <Button
             variant="outline"
@@ -116,7 +110,6 @@ function Links() {
 }
 
 function Overview() {
-  const t = useTranslations("Overview")
   const [mouted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
@@ -136,9 +129,9 @@ function Overview() {
   }, [])
   return (
     <section className={"mt-10 flex flex-col md:mt-16"}>
-      <p className="text-base font-semibold">{t("p_2277-2331_Overview")}</p>
+      <p className="text-base font-semibold">{"概览 👋"}</p>
       <div className="flex items-center gap-1.5">
-        <p className="text-sm font-medium opacity-50">{t("p_2390-2457_wherethetimeis")}</p>
+        <p className="text-sm font-medium opacity-50">{"目前时间为"}</p>
         {mouted ? (
           <p className="text-sm font-medium">{timeString}</p>
         ) : (

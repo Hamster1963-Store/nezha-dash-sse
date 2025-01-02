@@ -7,12 +7,10 @@ import { ServerDetailLoading } from "@/components/loading/ServerDetailLoading"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn, formatBytes } from "@/lib/utils"
-import { useTranslations } from "next-intl"
 import { notFound, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 export default function ServerDetailClient({ server_id }: { server_id: number }) {
-  const t = useTranslations("ServerDetailClient")
   const router = useRouter()
 
   const [hasHistory, setHasHistory] = useState(false)
@@ -58,7 +56,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("status")}</p>
+              <p className="text-xs text-muted-foreground">{"状态"}</p>
               <Badge
                 className={cn(
                   "text-[9px] rounded-[6px] w-fit px-1 py-0 -mt-[0.3px] dark:text-white",
@@ -68,7 +66,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
                   },
                 )}
               >
-                {data?.online_status ? t("Online") : t("Offline")}
+                {data?.online_status ? "在线" : "离线"}
               </Badge>
             </section>
           </CardContent>
@@ -76,12 +74,12 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("Uptime")}</p>
+              <p className="text-xs text-muted-foreground">{"在线时长"}</p>
               <div className="text-xs">
                 {" "}
                 {data?.status.Uptime / 86400 >= 1
-                  ? (data?.status.Uptime / 86400).toFixed(0) + " " + t("Days")
-                  : (data?.status.Uptime / 3600).toFixed(0) + " " + t("Hours")}{" "}
+                  ? (data?.status.Uptime / 86400).toFixed(0) + " " + "天"
+                  : (data?.status.Uptime / 3600).toFixed(0) + " " + "小时"}{" "}
               </div>
             </section>
           </CardContent>
@@ -90,7 +88,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
-                <p className="text-xs text-muted-foreground">{t("Version")}</p>
+                <p className="text-xs text-muted-foreground">{"版本"}</p>
                 <div className="text-xs">{data?.host.Version} </div>
               </section>
             </CardContent>
@@ -100,7 +98,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
-                <p className="text-xs text-muted-foreground">{t("Arch")}</p>
+                <p className="text-xs text-muted-foreground">{"架构"}</p>
                 <div className="text-xs">{data?.host.Arch} </div>
               </section>
             </CardContent>
@@ -110,7 +108,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("Mem")}</p>
+              <p className="text-xs text-muted-foreground">{"内存"}</p>
               <div className="text-xs">{formatBytes(data?.host.MemTotal)}</div>
             </section>
           </CardContent>
@@ -118,7 +116,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("Disk")}</p>
+              <p className="text-xs text-muted-foreground">{"硬盘"}</p>
               <div className="text-xs">{formatBytes(data?.host.DiskTotal)}</div>
             </section>
           </CardContent>
@@ -126,7 +124,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("Region")}</p>
+              <p className="text-xs text-muted-foreground">{"地区"}</p>
               <section className="flex items-start gap-1">
                 <div className="text-xs text-start">{data?.host.CountryCode.toUpperCase()}</div>
                 <ServerFlag
@@ -143,7 +141,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
-                <p className="text-xs text-muted-foreground">{t("System")}</p>
+                <p className="text-xs text-muted-foreground">{"系统"}</p>
 
                 <div className="text-xs">
                   {" "}
@@ -157,7 +155,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
-                <p className="text-xs text-muted-foreground">{t("CPU")}</p>
+                <p className="text-xs text-muted-foreground">{"CPU"}</p>
 
                 <div className="text-xs"> {data?.host.CPU.join(", ")}</div>
               </section>
@@ -179,7 +177,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("Load")}</p>
+              <p className="text-xs text-muted-foreground">{"负载"}</p>
               <div className="text-xs">
                 {data.status.Load1.toFixed(2) || "0.00"} / {data.status.Load5.toFixed(2) || "0.00"}{" "}
                 / {data.status.Load15.toFixed(2) || "0.00"}
@@ -190,7 +188,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("Upload")}</p>
+              <p className="text-xs text-muted-foreground">{"上传"}</p>
               {data.status.NetOutTransfer ? (
                 <div className="text-xs"> {formatBytes(data.status.NetOutTransfer)} </div>
               ) : (
@@ -202,7 +200,7 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
         <Card className="rounded-[10px] bg-transparent border-none shadow-none">
           <CardContent className="px-1.5 py-1">
             <section className="flex flex-col items-start gap-0.5">
-              <p className="text-xs text-muted-foreground">{t("Download")}</p>
+              <p className="text-xs text-muted-foreground">{"下载"}</p>
               {data.status.NetInTransfer ? (
                 <div className="text-xs"> {formatBytes(data.status.NetInTransfer)} </div>
               ) : (
