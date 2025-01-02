@@ -70,15 +70,7 @@ export default function ServerListClient() {
     }
   }, [])
 
-  const { data, error } = useServerData()
-
-  if (error)
-    return (
-      <div className="flex flex-col items-center justify-center">
-        <p className="text-sm font-medium opacity-40">{error.message}</p>
-        <p className="text-sm font-medium opacity-40">{t("error_message")}</p>
-      </div>
-    )
+  const { data } = useServerData()
 
   if (!data?.result)
     return (

@@ -36,22 +36,11 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
     }
   }
 
-  const { data: serverList, error, isLoading } = useServerData()
+  const { data: serverList, isSSEConnected } = useServerData()
   const data = serverList?.result?.find((item) => item.id === server_id)
 
-  if (!data && !isLoading) {
+  if (!data && !isSSEConnected) {
     notFound()
-  }
-
-  if (error) {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center">
-          <p className="text-sm font-medium opacity-40">{error.message}</p>
-          <p className="text-sm font-medium opacity-40">{t("detail_fetch_error_message")}</p>
-        </div>
-      </>
-    )
   }
 
   if (!data) return <ServerDetailLoading />

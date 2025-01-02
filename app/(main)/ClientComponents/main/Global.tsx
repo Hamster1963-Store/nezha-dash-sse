@@ -9,14 +9,7 @@ import GlobalInfo from "./GlobalInfo"
 import { InteractiveMap } from "./InteractiveMap"
 
 export default function ServerGlobal() {
-  const { data: nezhaServerList, error } = useServerData()
-
-  if (error)
-    return (
-      <div className="flex flex-col items-center justify-center">
-        <p className="text-sm font-medium opacity-40">{error.message}</p>
-      </div>
-    )
+  const { data: nezhaServerList } = useServerData()
 
   if (!nezhaServerList) {
     return <GlobalLoading />

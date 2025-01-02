@@ -1,10 +1,8 @@
 "use client"
 
 import { ServerApi } from "@/app/types/nezha-api"
-import getEnv from "@/lib/env-entry"
-import { nezhaFetcher } from "@/lib/utils"
+import { SSEDataFetch } from "@/lib/sseFetch"
 import { ReactNode, createContext, useContext, useEffect, useState } from "react"
-import useSWR from "swr"
 
 export interface ServerDataWithTimestamp {
   timestamp: number
@@ -13,8 +11,7 @@ export interface ServerDataWithTimestamp {
 
 interface ServerDataContextType {
   data: ServerApi | undefined
-  error: Error | undefined
-  isLoading: boolean
+  isSSEConnected: boolean
   history: ServerDataWithTimestamp[]
 }
 
@@ -24,14 +21,15 @@ const MAX_HISTORY_LENGTH = 30
 
 export function ServerDataProvider({ children }: { children: ReactNode }) {
   const [history, setHistory] = useState<ServerDataWithTimestamp[]>([])
+  const [isSSEConnected, setIsSSEConnected] = useState(false)
 
-  const { data, error, isLoading } = useSWR<ServerApi>("/api/server", nezhaFetcher, {
-    refreshInterval: Number(getEnv("NEXT_PUBLIC_NezhaFetchInterval")) || 2000,
-    dedupingInterval: 1000,
-  })
+  const data: ServerApi = SSEDataFetch(
+    "https://home-api.buycoffee.top/v2/GetNezhaDashData?sse=true",
+  )
 
   useEffect(() => {
     if (data) {
+      setIsSSEConnected(true)
       setHistory((prev) => {
         const newHistory = [
           {
@@ -47,7 +45,7 @@ export function ServerDataProvider({ children }: { children: ReactNode }) {
   }, [data])
 
   return (
-    <ServerDataContext.Provider value={{ data, error, isLoading, history }}>
+    <ServerDataContext.Provider value={{ data, isSSEConnected, history }}>
       {children}
     </ServerDataContext.Provider>
   )

@@ -50,22 +50,10 @@ export default function ServerDetailChartClient({
   server_id: number
   show: boolean
 }) {
-  const t = useTranslations("ServerDetailChartClient")
-
-  const { data: serverList, error, history } = useServerData()
+  const { data: serverList, history } = useServerData()
 
   const data = serverList?.result?.find((item) => item.id === server_id)
 
-  if (error) {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center">
-          <p className="text-sm font-medium opacity-40">{error.message}</p>
-          <p className="text-sm font-medium opacity-40">{t("chart_fetch_error_message")}</p>
-        </div>
-      </>
-    )
-  }
   if (!data) return <ServerDetailChartLoading />
 
   return (

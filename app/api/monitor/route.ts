@@ -1,4 +1,3 @@
-import { auth } from "@/auth"
 import getEnv from "@/lib/env-entry"
 import { GetServerMonitor } from "@/lib/serverFetch"
 import { redirect } from "next/navigation"
@@ -12,13 +11,6 @@ interface ResError extends Error {
 }
 
 export async function GET(req: NextRequest) {
-  if (getEnv("SitePassword")) {
-    const session = await auth()
-    if (!session) {
-      redirect("/")
-    }
-  }
-
   const { searchParams } = new URL(req.url)
   const server_id = searchParams.get("server_id")
 

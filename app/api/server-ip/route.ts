@@ -1,10 +1,8 @@
 import fs from "fs"
 import path from "path"
-import { auth } from "@/auth"
 import getEnv from "@/lib/env-entry"
 import { GetServerIP } from "@/lib/serverFetch"
 import { AsnResponse, CityResponse, Reader } from "maxmind"
-import { redirect } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"
@@ -20,13 +18,6 @@ export type IPInfo = {
 }
 
 export async function GET(req: NextRequest) {
-  if (getEnv("SitePassword")) {
-    const session = await auth()
-    if (!session) {
-      redirect("/")
-    }
-  }
-
   if (!getEnv("NEXT_PUBLIC_ShowIpInfo")) {
     return NextResponse.json({ error: "NEXT_PUBLIC_ShowIpInfo is disable" }, { status: 400 })
   }

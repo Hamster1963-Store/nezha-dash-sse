@@ -13,23 +13,11 @@ import { useTranslations } from "next-intl"
 import Image from "next/image"
 
 export default function ServerOverviewClient() {
-  const { data, error, isLoading } = useServerData()
+  const { data, isSSEConnected } = useServerData()
   const { status, setStatus } = useStatus()
   const { filter, setFilter } = useFilter()
   const t = useTranslations("ServerOverviewClient")
   const disableCartoon = getEnv("NEXT_PUBLIC_DisableCartoon") === "true"
-
-  if (error) {
-    const errorInfo = error as any
-    return (
-      <div className="flex flex-col items-center justify-center">
-        <p className="text-sm font-medium opacity-40">
-          Error status:{errorInfo?.status} {errorInfo.info?.cause ?? errorInfo?.message}
-        </p>
-        <p className="text-sm font-medium opacity-40">{t("error_message")}</p>
-      </div>
-    )
-  }
 
   return (
     <>
@@ -177,7 +165,7 @@ export default function ServerOverviewClient() {
           </CardContent>
         </Card>
       </section>
-      {data?.result === undefined && !isLoading && (
+      {data?.result === undefined && !isSSEConnected && (
         <div className="flex flex-col items-center justify-center">
           <p className="text-sm font-medium opacity-40">{t("error_message")}</p>
         </div>
