@@ -23,7 +23,7 @@ export default function ServerListClient() {
   const { status } = useStatus()
   const { filter } = useFilter()
   const containerRef = useRef<HTMLDivElement>(null)
-  const defaultTag = "defaultTag"
+  const defaultTag = "全部"
 
   const [tag, setTag] = useState<string>(defaultTag)
   const [showMap, setShowMap] = useState<boolean>(false)

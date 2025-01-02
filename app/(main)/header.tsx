@@ -85,10 +85,7 @@ type links = {
 }
 
 function Links() {
-  const links: links[] = [
-    { link: "https://github.com/hamster1963/nezha-dash", name: "GitHub" },
-    { link: "https://buycoffee.top/coffee", name: "Buycoffee☕️" },
-  ]
+  const links: links[] = [{ link: "https://buycoffee.top/coffee", name: "Buycoffee☕️" }]
 
   return (
     <div className="flex items-center gap-2">

@@ -108,7 +108,7 @@ export default function Switch({
           >
             <div className="relative z-20 flex items-center gap-1">
               <div className="whitespace-nowrap flex items-center gap-2">
-                {tag === "defaultTag" ? "defaultTag" : tag}{" "}
+                {tag === "全部" ? "全部" : tag}{" "}
               </div>
             </div>
           </div>
