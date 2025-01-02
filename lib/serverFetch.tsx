@@ -1,6 +1,20 @@
 "use server"
 
-import { NezhaAPI } from "@/app/types/nezha-api"
+import { NezhaAPI, ServerApi } from "@/app/types/nezha-api"
+
+export async function GetNezhaData(): Promise<ServerApi> {
+  const res = await fetch("https://home-api.buycoffee.top/v2/GetNezhaDashData", {
+    next: {
+      revalidate: 1,
+    },
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch nezha server data")
+  }
+  return res.json().then((data) => {
+    return data.data
+  })
+}
 
 export async function GetServerMonitor({ server_id }: { server_id: number }) {
   let nezhaBaseUrl = process.env["NezhaBaseUrl"]

@@ -19,12 +19,16 @@ const ServerDataContext = createContext<ServerDataContextType | undefined>(undef
 
 const MAX_HISTORY_LENGTH = 30
 
-export function ServerDataProvider({ children }: { children: ReactNode }) {
+export function ServerDataProvider({
+  children,
+  fallbackData,
+}: { children: ReactNode; fallbackData: ServerApi }) {
   const [history, setHistory] = useState<ServerDataWithTimestamp[]>([])
   const [isSSEConnected, setIsSSEConnected] = useState(false)
 
   const data: ServerApi = SSEDataFetch(
     "https://home-api.buycoffee.top/v2/GetNezhaDashData?sse=true",
+    fallbackData,
   )
 
   useEffect(() => {
