@@ -35,22 +35,22 @@ export function ModeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col gap-0.5" align="end">
         <DropdownMenuItem
-          className={cn("rounded-b-[5px]", { "gap-3 bg-muted": theme === "light" })}
+          className={cn("rounded-b-[5px]", { "gap-3 bg-muted font-semibold": theme === "light" })}
           onSelect={(e) => handleSelect(e, "light")}
         >
-          {"亮色模式"} {theme === "light" && <CheckCircleIcon className="size-4" />}
+          {"亮色"} {theme === "light" && <CheckCircleIcon className="size-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem
-          className={cn("rounded-[5px]", { "gap-3 bg-muted": theme === "dark" })}
+          className={cn("rounded-[5px]", { "gap-3 bg-muted font-semibold": theme === "dark" })}
           onSelect={(e) => handleSelect(e, "dark")}
         >
-          {"暗色模式"} {theme === "dark" && <CheckCircleIcon className="size-4" />}
+          {"暗色"} {theme === "dark" && <CheckCircleIcon className="size-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem
-          className={cn("rounded-t-[5px]", { "gap-3 bg-muted": theme === "system" })}
+          className={cn("rounded-t-[5px]", { "gap-3 bg-muted font-semibold": theme === "system" })}
           onSelect={(e) => handleSelect(e, "system")}
         >
-          {"跟随系统"} {theme === "system" && <CheckCircleIcon className="size-4" />}
+          {"系统"} {theme === "system" && <CheckCircleIcon className="size-4" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -2,8 +2,7 @@ name: Build and push Docker image
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: ["main"]
 
 env:
   ALIYUN_REGISTRY_IMAGE: registry.cn-guangzhou.aliyuncs.com/hamster-home/nezhadash-sse
