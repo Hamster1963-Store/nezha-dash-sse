@@ -249,7 +249,7 @@ function ProcessChart({
       <CardContent className="px-6 py-3">
         <section className="flex flex-col gap-1">
           <div className="flex items-center justify-between">
-            <p className="text-md font-medium">{"Process"}</p>
+            <p className="text-md font-medium">{"进程数"}</p>
             <section className="flex items-center gap-2">
               <p className="text-xs text-end w-10 font-medium">{process}</p>
             </section>
@@ -357,7 +357,7 @@ function MemChart({ data, history }: { data: NezhaAPISafe; history: ServerDataWi
           <div className="flex items-center justify-between">
             <section className="flex items-center gap-4">
               <div className="flex flex-col">
-                <p className=" text-xs text-muted-foreground">{"Mem"}</p>
+                <p className=" text-xs text-muted-foreground">{"内存"}</p>
                 <div className="flex items-center gap-2">
                   <AnimatedCircularProgressBar
                     className="size-3 text-[0px]"
@@ -370,7 +370,7 @@ function MemChart({ data, history }: { data: NezhaAPISafe; history: ServerDataWi
                 </div>
               </div>
               <div className="flex flex-col">
-                <p className=" text-xs text-muted-foreground">{"Swap"}</p>
+                <p className=" text-xs text-muted-foreground">{"虚拟内存"}</p>
                 <div className="flex items-center gap-2">
                   <AnimatedCircularProgressBar
                     className="size-3 text-[0px]"
@@ -504,7 +504,7 @@ function DiskChart({ data, history }: { data: NezhaAPISafe; history: ServerDataW
       <CardContent className="px-6 py-3">
         <section className="flex flex-col gap-1">
           <div className="flex items-center justify-between">
-            <p className="text-md font-medium">{"Disk"}</p>
+            <p className="text-md font-medium">{"硬盘"}</p>
             <section className="flex flex-col items-end gap-0.5">
               <section className="flex items-center gap-2">
                 <p className="text-xs text-end w-10 font-medium">{disk.toFixed(0)}%</p>
@@ -643,14 +643,14 @@ function NetworkChart({
           <div className="flex items-center">
             <section className="flex items-center gap-4">
               <div className="flex flex-col w-20">
-                <p className="text-xs text-muted-foreground">{"Upload"}</p>
+                <p className="text-xs text-muted-foreground">{"上传"}</p>
                 <div className="flex items-center gap-1">
                   <span className="relative inline-flex  size-1.5 rounded-full bg-[hsl(var(--chart-1))]"></span>
                   <p className="text-xs font-medium">{up.toFixed(2)} M/s</p>
                 </div>
               </div>
               <div className="flex flex-col w-20">
-                <p className=" text-xs text-muted-foreground">{"Download"}</p>
+                <p className=" text-xs text-muted-foreground">{"下载"}</p>
                 <div className="flex items-center gap-1">
                   <span className="relative inline-flex  size-1.5 rounded-full bg-[hsl(var(--chart-4))]"></span>
                   <p className="text-xs font-medium">{down.toFixed(2)} M/s</p>
