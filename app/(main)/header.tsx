@@ -50,9 +50,6 @@ function Header() {
           <p className="hidden text-sm font-medium opacity-40 md:block">{customDescription}</p>
         </section>
         <section className="flex items-center gap-2">
-          <div className="hidden sm:block">
-            <Links />
-          </div>
           <ModeToggle />
           <Button
             variant="outline"
@@ -71,37 +68,7 @@ function Header() {
           </Button>
         </section>
       </section>
-      <div className="w-full flex justify-end sm:hidden mt-1">
-        <Links />
-      </div>
       <Overview />
-    </div>
-  )
-}
-
-type links = {
-  link: string
-  name: string
-}
-
-function Links() {
-  const links: links[] = [{ link: "https://buycoffee.top/coffee", name: "Buycoffee☕️" }]
-
-  return (
-    <div className="flex items-center gap-2">
-      {links.map((link, index) => {
-        return (
-          <a
-            key={index}
-            href={link.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm font-medium opacity-50 transition-opacity hover:opacity-100"
-          >
-            {link.name}
-          </a>
-        )
-      })}
     </div>
   )
 }
