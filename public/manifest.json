@@ -14,8 +14,6 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "hsl(0 0% 98%)",
-  "background_color": "hsl(0 0% 98%)",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait"
