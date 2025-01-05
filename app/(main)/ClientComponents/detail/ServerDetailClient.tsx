@@ -8,11 +8,13 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn, formatBytes } from "@/lib/utils"
 import countries from "i18n-iso-countries"
+import enLocale from "i18n-iso-countries/langs/en.json"
 import { notFound, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 export default function ServerDetailClient({ server_id }: { server_id: number }) {
   const router = useRouter()
+  countries.registerLocale(enLocale)
 
   const [hasHistory, setHasHistory] = useState(false)
 
@@ -43,8 +45,6 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
   }
 
   if (!data) return <ServerDetailLoading />
-
-  countries.registerLocale(require("i18n-iso-countries/langs/en.json"))
 
   return (
     <div>
