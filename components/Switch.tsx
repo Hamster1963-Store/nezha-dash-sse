@@ -45,7 +45,7 @@ export default function Switch({
   useEffect(() => {
     const currentTagElement = tagRefs.current[allTag.indexOf(nowTag)]?.current
     if (currentTagElement) {
-      const parentPadding = 1
+      const parentPadding = 0
       setIndicator({
         x:
           allTag.indexOf(nowTag) !== 0
