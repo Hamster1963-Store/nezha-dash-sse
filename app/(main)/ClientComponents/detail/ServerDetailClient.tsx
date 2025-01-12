@@ -67,8 +67,6 @@ export default function ServerDetailClient({ server_id }: { server_id: number })
     last_active_time_string,
   } = formatNezhaInfo(serverData)
 
-  console.log("last_active_time_string", last_active_time_string)
-
   return (
     <div>
       <div
