@@ -1,10 +1,5 @@
-import fs from "fs"
-import path from "path"
 import { GetServerIP } from "@/lib/serverFetch"
-import { AsnResponse, CityResponse, Reader } from "maxmind"
 import { NextRequest, NextResponse } from "next/server"
-
-export const dynamic = "force-dynamic"
 
 interface ResError extends Error {
   statusCode: number
@@ -12,8 +7,8 @@ interface ResError extends Error {
 }
 
 export type IPInfo = {
-  city: CityResponse
-  asn: AsnResponse
+  ip_info: any
+  ip_asn: any
 }
 
 export async function GET(req: NextRequest) {
@@ -27,21 +22,15 @@ export async function GET(req: NextRequest) {
   try {
     const ip = await GetServerIP({ server_id: Number(server_id) })
 
-    const cityDbPath = path.join(process.cwd(), "lib", "GeoLite2-City.mmdb")
+    const ipInfo = await fetch(`https://blog-api.buycoffee.top/api/GetASN?ip=${ip}`, {
+      next: {
+        revalidate: 60 * 60 * 24 * 30,
+      },
+    })
 
-    const asnDbPath = path.join(process.cwd(), "lib", "GeoLite2-ASN.mmdb")
+    const data = await ipInfo.json()
 
-    const cityDbBuffer = fs.readFileSync(cityDbPath)
-    const asnDbBuffer = fs.readFileSync(asnDbPath)
-
-    const cityLookup = new Reader<CityResponse>(cityDbBuffer)
-    const asnLookup = new Reader<AsnResponse>(asnDbBuffer)
-
-    const data: IPInfo = {
-      city: cityLookup.get(ip) as CityResponse,
-      asn: asnLookup.get(ip) as AsnResponse,
-    }
-    return NextResponse.json(data, { status: 200 })
+    return NextResponse.json(data.data, { status: 200 })
   } catch (error) {
     const err = error as ResError
     console.error("Error in GET handler:", err)

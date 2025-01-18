@@ -20,52 +20,52 @@ export default function ServerIPInfo({ server_id }: { server_id: number }) {
   return (
     <>
       <section className="flex flex-wrap gap-2 mb-4">
-        {data.asn?.autonomous_system_organization && (
+        {data.ip_asn?.autonomous_system_organization && (
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
                 <p className="text-xs text-muted-foreground">{"ASN"}</p>
-                <div className="text-xs">{data.asn.autonomous_system_organization}</div>
+                <div className="text-xs">{data.ip_asn.autonomous_system_organization}</div>
               </section>
             </CardContent>
           </Card>
         )}
-        {data.asn?.autonomous_system_number && (
+        {data.ip_asn?.autonomous_system_number && (
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
                 <p className="text-xs text-muted-foreground">{"ASN编号"}</p>
-                <div className="text-xs">AS{data.asn.autonomous_system_number}</div>
+                <div className="text-xs">AS{data.ip_asn.autonomous_system_number}</div>
               </section>
             </CardContent>
           </Card>
         )}
-        {data.city?.registered_country?.names.en && (
+        {data.ip_info?.registered_country?.names.en && (
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
                 <p className="text-xs text-muted-foreground">{"注册地"}</p>
-                <div className="text-xs">{data.city.registered_country?.names.en}</div>
+                <div className="text-xs">{data.ip_info.registered_country?.names.en}</div>
               </section>
             </CardContent>
           </Card>
         )}
-        {data.city?.country?.iso_code && (
+        {data.ip_info?.country?.iso_code && (
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
                 <p className="text-xs text-muted-foreground">{"ISO"}</p>
-                <div className="text-xs">{data.city.country?.iso_code}</div>
+                <div className="text-xs">{data.ip_info.country?.iso_code}</div>
               </section>
             </CardContent>
           </Card>
         )}
-        {data.city?.location?.time_zone && (
+        {data.ip_info?.location?.time_zone && (
           <Card className="rounded-[10px] bg-transparent border-none shadow-none">
             <CardContent className="px-1.5 py-1">
               <section className="flex flex-col items-start gap-0.5">
                 <p className="text-xs text-muted-foreground">{"时区"}</p>
-                <div className="text-xs">{data.city.location?.time_zone}</div>
+                <div className="text-xs">{data.ip_info.location?.time_zone}</div>
               </section>
             </CardContent>
           </Card>
