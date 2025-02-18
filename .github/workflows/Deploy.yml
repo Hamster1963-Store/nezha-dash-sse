@@ -51,8 +51,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~/.bun/install/cache
-            node_modules
+            **/node_modules
+            /home/runner/.bun
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
             ${{ runner.os }}-bun-
