@@ -1,5 +1,6 @@
 "use client"
 
+import AnimateCountClient from "@/components/AnimatedCount"
 import { ModeToggle } from "@/components/ThemeSwitcher"
 import { Loader } from "@/components/loading/Loader"
 import { Button } from "@/components/ui/button"
@@ -10,7 +11,6 @@ import { DateTime } from "luxon"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useRef, useState } from "react"
 import { useWebSocketContext } from "../lib/websocketProvider"
-
 function Header() {
   const customTitle = "咖啡探针"
   const customDescription = "Coffee ☕️"
@@ -55,10 +55,10 @@ function Header() {
             variant="outline"
             size="sm"
             className={cn(
-              "hover:bg-white dark:hover:bg-black cursor-default rounded-full flex gap-2 items-center px-[9px] bg-white dark:bg-black",
+              "hover:bg-white dark:hover:bg-black overflow-hidden cursor-default rounded-full flex gap-2 items-center px-[9px] bg-white dark:bg-black",
             )}
           >
-            {connected ? onlineCount : <Loader visible={true} />}
+            {connected ? <AnimateCountClient count={onlineCount} /> : <Loader visible={true} />}
             <p className="text-muted-foreground">{connected ? "在线" : "离线"}</p>
             <span
               className={cn("h-2 w-2 rounded-full bg-green-500", {
