@@ -48,16 +48,6 @@ jobs:
             type=raw,value=latest
             type=ref,event=tag
 
-      - name: Cache Bun dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            **/node_modules
-            /home/runner/.bun
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
