@@ -120,6 +120,7 @@ const useCurrentTime = () => {
 
 const Overview = memo(function Overview() {
   const time = useCurrentTime()
+  const [mounted, setMounted] = useState(false)
 
   const getGreeting = () => {
     const hour = time.hh
@@ -132,20 +133,34 @@ const Overview = memo(function Overview() {
     }
   }
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <section className={"mt-10 flex flex-col md:mt-16"}>
-      <p className="text-base font-semibold">{getGreeting()}</p>
-      <div className="flex items-center gap-1">
+      <p className="text-base font-semibold">
+        {mounted ? (
+          getGreeting()
+        ) : (
+          <Skeleton className="h-[24px] w-18 rounded-[5px] bg-muted-foreground/10 animate-none"></Skeleton>
+        )}
+      </p>
+      <div className="flex items-center gap-1 mt-0.5">
         <p className="text-sm font-medium opacity-50">{"目前时间为"}</p>
-        <div className="flex items-center text-sm font-medium">
-          <AnimateCountClient count={time.hh} minDigits={2} />
-          <span className="text-sm mb-[1px] font-medium opacity-50">:</span>
-          <AnimateCountClient count={time.mm} minDigits={2} />
-          <span className="text-sm mb-[1px] font-medium opacity-50">:</span>
-          <span className="text-sm font-medium">
-            <AnimateCountClient count={time.ss} minDigits={2} />
-          </span>
-        </div>
+        {mounted ? (
+          <div className="flex items-center text-sm font-medium">
+            <AnimateCountClient count={time.hh} minDigits={2} />
+            <span className="text-sm mb-[1px] font-medium opacity-50">:</span>
+            <AnimateCountClient count={time.mm} minDigits={2} />
+            <span className="text-sm mb-[1px] font-medium opacity-50">:</span>
+            <span className="text-sm font-medium">
+              <AnimateCountClient count={time.ss} minDigits={2} />
+            </span>
+          </div>
+        ) : (
+          <Skeleton className="h-[21px] w-16 rounded-[5px] bg-muted-foreground/10 animate-none"></Skeleton>
+        )}
       </div>
     </section>
   )
