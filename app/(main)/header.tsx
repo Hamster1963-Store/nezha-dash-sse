@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 import { DateTime } from "luxon"
 import { useRouter } from "next/navigation"
-import React, { useEffect, useRef, useState } from "react"
+import React, { memo, useEffect, useRef, useState } from "react"
 import { useWebSocketContext } from "../lib/websocketProvider"
 function Header() {
   const customTitle = "咖啡探针"
@@ -73,36 +73,82 @@ function Header() {
   )
 }
 
-function Overview() {
-  const [mouted, setMounted] = useState(false)
+interface TimeState {
+  hh: number
+  mm: number
+  ss: number
+}
+
+const useCurrentTime = () => {
+  const [time, setTime] = useState<TimeState>({
+    hh: DateTime.now().setLocale("en-US").hour,
+    mm: DateTime.now().setLocale("en-US").minute,
+    ss: DateTime.now().setLocale("en-US").second,
+  })
+
   useEffect(() => {
-    setMounted(true)
-  }, [])
-  const timeOption = DateTime.TIME_WITH_SECONDS
-  timeOption.hour12 = true
-  const [timeString, setTimeString] = useState(
-    DateTime.now().setLocale("en-US").toLocaleString(timeOption),
-  )
-  useEffect(() => {
+    let animationFrameId: number
+    let lastSecond = DateTime.now().setLocale("en-US").second
+
     const updateTime = () => {
-      const now = DateTime.now().setLocale("en-US").toLocaleString(timeOption)
-      setTimeString(now)
-      requestAnimationFrame(updateTime)
+      const now = DateTime.now().setLocale("en-US")
+      const currentSecond = now.second
+
+      if (currentSecond !== lastSecond) {
+        lastSecond = currentSecond
+        setTime({
+          hh: now.hour,
+          mm: now.minute,
+          ss: currentSecond,
+        })
+      }
+
+      animationFrameId = requestAnimationFrame(updateTime)
     }
-    requestAnimationFrame(updateTime)
+
+    animationFrameId = requestAnimationFrame(updateTime)
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId)
+      }
+    }
   }, [])
+
+  return time
+}
+
+const Overview = memo(function Overview() {
+  const time = useCurrentTime()
+
+  const getGreeting = () => {
+    const hour = time.hh
+    if (hour >= 5 && hour < 12) {
+      return "早安 🌅"
+    } else if (hour >= 12 && hour < 18) {
+      return "午安 🌞"
+    } else {
+      return "晚安 🌙"
+    }
+  }
+
   return (
     <section className={"mt-10 flex flex-col md:mt-16"}>
-      <p className="text-base font-semibold">{"概览 👋"}</p>
-      <div className="flex items-center gap-1.5">
+      <p className="text-base font-semibold">{getGreeting()}</p>
+      <div className="flex items-center gap-1">
         <p className="text-sm font-medium opacity-50">{"目前时间为"}</p>
-        {mouted ? (
-          <p className="text-sm font-medium">{timeString}</p>
-        ) : (
-          <Skeleton className="h-[20px] w-[50px] rounded-[5px] bg-muted-foreground/10 animate-none"></Skeleton>
-        )}
+        <div className="flex items-center text-sm font-medium">
+          <AnimateCountClient count={time.hh} minDigits={2} />
+          <span className="text-sm mb-[1px] font-medium opacity-50">:</span>
+          <AnimateCountClient count={time.mm} minDigits={2} />
+          <span className="text-sm mb-[1px] font-medium opacity-50">:</span>
+          <span className="text-sm font-medium">
+            <AnimateCountClient count={time.ss} minDigits={2} />
+          </span>
+        </div>
       </div>
     </section>
   )
-}
+})
+
 export default Header

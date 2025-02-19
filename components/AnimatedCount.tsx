@@ -1,13 +1,14 @@
 import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
 
-
 export default function AnimateCountClient({
   count,
   className,
+  minDigits,
 }: {
   count: number
   className?: string
+  minDigits?: number
 }) {
   const [previousCount, setPreviousCount] = useState(count)
 
@@ -23,6 +24,7 @@ export default function AnimateCountClient({
       key={count}
       preCount={previousCount}
       className={cn("inline-flex items-center leading-none", className)}
+      minDigits={minDigits}
       data-issues-count-animation
     >
       {count}
@@ -34,23 +36,25 @@ export function AnimateCount({
   children: count,
   className,
   preCount,
+  minDigits = 1,
   ...props
 }: {
   children: number
   className?: string
   preCount?: number
+  minDigits?: number
 }) {
   const currentDigits = count.toString().split("")
   const previousDigits = (
     preCount !== undefined ? preCount.toString() : count - 1 >= 0 ? (count - 1).toString() : "0"
   ).split("")
 
-  // Only pad with zeros if both numbers need to maintain the same length for animation
-  const maxLength = Math.max(previousDigits.length, currentDigits.length)
+  // Ensure both numbers meet the minimum length requirement and maintain the same length for animation
+  const maxLength = Math.max(previousDigits.length, currentDigits.length, minDigits)
   while (previousDigits.length < maxLength) {
     previousDigits.unshift("0")
   }
-  while (currentDigits.length < maxLength && previousDigits[0] === "0") {
+  while (currentDigits.length < maxLength) {
     currentDigits.unshift("0")
   }
 
